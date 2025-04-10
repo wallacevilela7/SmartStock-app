@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: smartstock-app
+
+  data:
+    mongodb:
+      authentication-database: admin
+      auto-index-creation: true
+      host: localhost
+      port: 27017
+      database: smartstockdb
+      username: admin
+      password: 123456
