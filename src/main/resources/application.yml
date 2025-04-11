@@ -11,3 +11,8 @@ spring:
       database: smartstockdb
       username: admin
       password: 123456
+
+app:
+  client:
+    id: ${APP_CLIENT_ID:ABC}
+    secret: ${APP_CLIENT_SECRET:DEF}
