@@ -10,6 +10,7 @@ import java.util.List;
 public class SmartStockService {
 
     private final ReportService reportService;
+    private final Double REORDER_SECURITY_PERCENTAGE = 0.20;
 
     public SmartStockService(ReportService reportService) {
         this.reportService = reportService;
@@ -20,16 +21,32 @@ public class SmartStockService {
 
         try {
             List<CsvStockItem> stockItems = reportService.readStockReport(reportPath);
+
+            // 2. para cada item do csv, fazer a requisição para a api de compras do smartstock
+            stockItems.forEach(item -> {
+                if (item.getQuantity() < item.getReorderThreshold()) {
+
+                    // 2.1 calcular a quantidade a ser recomprada
+                    var reorderQuantity = calculateReorderQuantity(item);
+
+
+                    // 2.2 fazer a requisição para a api de compras do smartstock
+
+
+                }
+            });
+
         } catch (
                 IOException e) {
             throw new RuntimeException(e);
         }
 
 
-        // 2. para cada item do csv, fazer a requisição para a api de compras do smartstock
-
-
-
         // 3. salvar cada item comprado no mongodb
+    }
+
+    private Integer calculateReorderQuantity(CsvStockItem item) {
+        return item.getReorderThreshold() +
+                ((int) Math.ceil(item.getReorderThreshold() * REORDER_SECURITY_PERCENTAGE));
     }
 }
