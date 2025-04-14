@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 public class PurchaseRequestEntity {
 
     @MongoId
-    @Field(name = "item_id")
     private String itemId;
 
     @Field(name = "item_name")
